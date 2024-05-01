@@ -62,7 +62,7 @@ function App() {
       // save user to MongoDB ...
       if (profileObj) {
         const response = await fetch(
-          'https://nova-dashboard-app.onrender.com',
+          'https://nova-dashboard-app.onrender.com/api/v1/users',
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -164,7 +164,7 @@ function App() {
             <ThemeProvider theme={theme}>
               <Refine
                 dataProvider={dataProvider(
-                  'https://nova-dashboard-app.onrender.com'
+                  'https://nova-dashboard-app.onrender.com/'
                 )}
                 notificationProvider={notificationProvider}
                 routerProvider={routerBindings}
