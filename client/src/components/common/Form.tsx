@@ -20,6 +20,7 @@ const Form = (props: FormProps) => {
     onFinish,
     formLoading,
     handleSubmit,
+    handleCancel,
     handleImageChange,
     onFinishHandler,
     propertyImage,
@@ -209,12 +210,21 @@ const Form = (props: FormProps) => {
             </Typography>
           </Stack>
 
-          <CustomButton
-            type="submit"
-            title={formLoading ? 'Submitting...' : 'Submit'}
-            backgroundColor="#475be8"
-            color="#fcfcfc"
-          />
+          <Box display="flex" justifyContent="flex-end" gap={4}>
+            <CustomButton
+              type="submit"
+              title={formLoading ? 'Submitting...' : 'Submit'}
+              backgroundColor="#475be8"
+              color="#fcfcfc"
+            />
+            <CustomButton
+              type="cancel"
+              title={'Cancel'}
+              handleClick={handleCancel}
+              backgroundColor="#475be8"
+              color="#fcfcfc"
+            />
+          </Box>
         </form>
       </Box>
     </Box>

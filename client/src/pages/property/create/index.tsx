@@ -36,11 +36,12 @@ const CreateProperty = () => {
 
   return (
     <Form
-      type="Create"
+      type="Post"
       register={register}
       onFinish={onFinish}
       formLoading={formLoading}
       handleSubmit={handleSubmit}
+      handleCancel={() => navigate('/properties')}
       propertyImage={propertyImage}
       handleImageChange={handleImageChange}
       onFinishHandler={onFinishHandler}

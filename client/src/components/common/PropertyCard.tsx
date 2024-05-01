@@ -15,7 +15,7 @@ const PropertyCard = (props: PropertyCardProps) => {
   return (
     <Card
       component={Link}
-      to={`/properties/${id}`}
+      to={`/properties/show/${id}`}
       sx={{
         cursor: 'pointer',
         textDecoration: 'none',

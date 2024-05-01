@@ -3,7 +3,7 @@ import { AppBar, Avatar, Stack, Toolbar, Typography } from '@mui/material'
 import { useGetIdentity } from '@refinedev/core'
 import { HamburgerMenu, RefineThemedLayoutV2HeaderProps } from '@refinedev/mui'
 
-interface IUser {
+export interface IUser {
   id: number
   name: string
   avatar: string

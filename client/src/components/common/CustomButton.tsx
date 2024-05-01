@@ -2,10 +2,19 @@ import { Button } from '@mui/material'
 import { CustomButtonProps } from '../../interfaces/common'
 
 const CustomButton = (props: CustomButtonProps) => {
-  const { type, title, backgroundColor, color, fullWidth, icon, handleClick } =
-    props
+  const {
+    disabled,
+    type,
+    title,
+    backgroundColor,
+    color,
+    fullWidth,
+    icon,
+    handleClick,
+  } = props
   return (
     <Button
+      disabled={disabled}
       type={type === 'submit' ? 'submit' : 'button'}
       sx={{
         flex: fullWidth ? 1 : 'unset',
