@@ -1,2 +1,2 @@
-export { default as Agents } from './index.tsx'
+export { default as Agents } from './list'
 export { default as AgentProfile } from './profile'

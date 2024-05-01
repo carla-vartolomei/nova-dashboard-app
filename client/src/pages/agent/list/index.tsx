@@ -1,7 +1,7 @@
 import React from 'react'
 import { useList } from '@refinedev/core'
 import { Box, Typography } from '@mui/material'
-import { AgentCard } from './../../components'
+import { AgentCard } from '../../../components'
 
 const Agents = () => {
   const { data, isLoading, isError } = useList({ resource: 'users' })
