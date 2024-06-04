@@ -19,7 +19,7 @@ const StatisticsCards = ({
   const statistics = [
     {
       title: 'All Properties',
-      value: properties + 1300,
+      value: properties,
       color: '#6C5DD3',
       lastYear: lastYearProperties.total,
     },
