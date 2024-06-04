@@ -153,7 +153,6 @@ const Profile = (props: ProfileProps) => {
             sx={{
               display: 'flex',
               flexWrap: 'wrap',
-              gap: 2.5,
             }}
           >
             {properties?.map((property: PropertyProps) => (

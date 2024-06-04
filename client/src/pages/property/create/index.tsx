@@ -38,7 +38,6 @@ const CreateProperty = () => {
     <Form
       type="Post"
       register={register}
-      onFinish={onFinish}
       formLoading={formLoading}
       handleSubmit={handleSubmit}
       handleCancel={() => navigate('/properties')}

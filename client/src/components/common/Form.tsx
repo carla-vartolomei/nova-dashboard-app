@@ -17,7 +17,6 @@ const Form = (props: FormProps) => {
   const {
     type,
     register,
-    onFinish,
     formLoading,
     handleSubmit,
     handleCancel,

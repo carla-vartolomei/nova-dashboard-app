@@ -61,18 +61,15 @@ function App() {
 
       // save user to MongoDB ...
       if (profileObj) {
-        const response = await fetch(
-          'https://nova-dashboard-app.onrender.com/api/v1/users',
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              name: profileObj.name,
-              email: profileObj.email,
-              avatar: profileObj.picture,
-            }),
-          }
-        )
+        const response = await fetch('http://localhost:8080/api/v1/users', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: profileObj.name,
+            email: profileObj.email,
+            avatar: profileObj.picture,
+          }),
+        })
 
         const data = await response.json()
 
@@ -163,9 +160,7 @@ function App() {
           <DevtoolsProvider>
             <ThemeProvider theme={theme}>
               <Refine
-                dataProvider={dataProvider(
-                  'https://nova-dashboard-app.onrender.com/'
-                )}
+                dataProvider={dataProvider('http://localhost:8080/api/v1')}
                 notificationProvider={notificationProvider}
                 routerProvider={routerBindings}
                 authProvider={authProvider}
@@ -190,16 +185,7 @@ function App() {
                     show: '/agents/show/:id',
                     icon: <PeopleAltOutlined />,
                   },
-                  {
-                    name: 'reviews',
-                    list: '/reviews',
-                    icon: <StarOutlineRounded />,
-                  },
-                  {
-                    name: 'messages',
-                    list: '/message',
-                    icon: <ChatBubbleOutline />,
-                  },
+
                   {
                     name: 'my-profile',
                     list: '/my-profile',
@@ -249,14 +235,6 @@ function App() {
                     <Route path="/agents">
                       <Route index element={<Agents />} />
                       <Route path="show/:id" element={<AgentProfile />} />
-                    </Route>
-
-                    <Route path="/reviews">
-                      <Route index element={<Home />} />
-                    </Route>
-
-                    <Route path="/messages">
-                      <Route index element={<Home />} />
                     </Route>
 
                     <Route path="/my-profile">

@@ -54,9 +54,10 @@ const getAllProperties = async (req, res) => {
 
 const getPropertyDetail = async (req, res) => {
   const { id } = req.params;
-  const propertyExists = await Property.findOne({ _id: id }).populate(
-    'creator'
-  );
+  const propertyExists = await Property.findOne({ _id: id }).populate([
+    'creator',
+    'renter',
+  ]);
 
   if (propertyExists) {
     res.status(200).json(propertyExists);
@@ -86,6 +87,7 @@ const createProperty = async (req, res) => {
       price,
       photo: photoUrl.url,
       creator: user._id,
+      monthsBooked: 0,
     });
 
     user.allProperties.push(newProperty._id);
@@ -101,8 +103,23 @@ const createProperty = async (req, res) => {
 const updateProperty = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, propertyType, location, price, photo } =
-      req.body;
+    const {
+      title,
+      description,
+      propertyType,
+      location,
+      price,
+      photo,
+      monthsBooked = 0,
+      email = '',
+    } = req.body;
+
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
+    const user = await User.findOne({ email }).session(session);
+
+    if (!user) throw new Error('User not found!');
 
     const photoUrl = await cloudinary.uploader.upload(photo);
 
@@ -115,8 +132,15 @@ const updateProperty = async (req, res) => {
         location,
         price,
         photo: photoUrl.url || photo,
+        monthsBooked,
       }
     );
+
+    if (monthsBooked > 0) {
+      await user.allRentals.push(id);
+    }
+    await user.save({ session });
+    await session.commitTransaction();
 
     res.status(200).json({ message: 'Property updated succesfully' });
   } catch (error) {

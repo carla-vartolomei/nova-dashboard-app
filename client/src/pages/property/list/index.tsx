@@ -8,7 +8,6 @@ import {
   Typography,
   Select,
   MenuItem,
-  SelectChangeEvent,
 } from '@mui/material'
 import { PropertyCard, CustomButton } from '../../../components'
 import { useMemo } from 'react'
@@ -25,7 +24,10 @@ const AllProperties = () => {
     setSorters,
     filters,
     setFilters,
-  } = useTable({ syncWithLocation: false })
+  } = useTable({
+    syncWithLocation: true,
+    pagination: { current: 1, pageSize: 9 },
+  })
 
   const allProperties = data?.data ?? []
 
@@ -56,10 +58,9 @@ const AllProperties = () => {
       <Box mt="20px" sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
         <Stack direction="column" width="100%">
           <Typography fontSize={25} fontWeight={700} color="#1142d">
-            {!allProperties.length
-              ? 'There are no properties'
-              : 'All Properties'}
+            All Properties
           </Typography>
+
           <Box display="flex" justifyContent="space-between">
             <Stack
               mt={1}
@@ -75,6 +76,7 @@ const AllProperties = () => {
                 icon={<Add />}
               />
             </Stack>
+
             <Box
               mb={2}
               mt={3}
@@ -157,18 +159,26 @@ const AllProperties = () => {
       <Box
         component="div"
         mt="20px"
-        sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 2.5,
+        }}
       >
-        {allProperties.map(({ _id: id, title, location, price, photo }) => (
-          <PropertyCard
-            key={id}
-            id={id}
-            title={title}
-            location={location}
-            price={price}
-            photo={photo}
-          />
-        ))}
+        {allProperties.length > 0 ? (
+          allProperties.map(({ _id: id, title, location, price, photo }) => (
+            <PropertyCard
+              key={id}
+              id={id}
+              title={title}
+              location={location}
+              price={price}
+              photo={photo}
+            />
+          ))
+        ) : (
+          <Typography>No properties</Typography>
+        )}
       </Box>
 
       {allProperties.length > 0 && (
@@ -178,13 +188,13 @@ const AllProperties = () => {
           gap={2}
           mt={3}
           justifyContent="flex-end"
-          position="absolute"
-          right="24px"
-          bottom="24px"
         >
           <CustomButton
             title="Previous"
-            handleClick={() => setCurrent((prev) => prev - 1)}
+            handleClick={() => {
+              setPageSize(9)
+              setCurrent((prev) => prev - 1)
+            }}
             backgroundColor="#475be8"
             color="#fcfcfc"
             disabled={!(current > 1)}
@@ -203,7 +213,10 @@ const AllProperties = () => {
 
           <CustomButton
             title="Next"
-            handleClick={() => setCurrent((prev) => prev + 1)}
+            handleClick={() => {
+              setPageSize(9)
+              setCurrent((prev) => prev + 1)
+            }}
             backgroundColor="#475be8"
             color="#fcfcfc"
             disabled={current === pageCount}
@@ -217,13 +230,12 @@ const AllProperties = () => {
             inputProps={{
               'aria-label': 'Without label',
             }}
-            defaultValue={10}
-            // value={''}
+            defaultValue={9}
             onChange={(e) => {
-              setPageSize(Number(e.target.value) ?? 10)
+              setPageSize(Number(e.target.value) ?? 9)
             }}
           >
-            {[10, 20, 30, 40, 50].map((size) => (
+            {[9, 18, 27, 36, 45].map((size) => (
               <MenuItem key={size} value={size}>
                 Show {size}
               </MenuItem>

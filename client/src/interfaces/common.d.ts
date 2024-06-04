@@ -30,9 +30,6 @@ export interface PropertyProps {
 export interface FormProps {
   type: string
   register: any
-  onFinish: (
-    values: FieldValues
-  ) => Promise<void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>>
   formLoading: boolean
   handleSubmit: FormEventHandler<HTMLFormElement> | undefined
   handleCancel: () => void

@@ -32,14 +32,18 @@ const EditProperty = () => {
   const onFinishHandler = async (data: FieldValues) => {
     if (!propertyImage.name) return alert('Please upload a property image')
 
-    await onFinish({ ...data, photo: propertyImage.url, email: user?.email })
+    await onFinish({
+      ...data,
+      photo: propertyImage.url,
+      email: user?.email,
+      monthsBooked: false,
+    })
   }
 
   return (
     <Form
       type="Edit"
       register={register}
-      onFinish={onFinish}
       formLoading={formLoading}
       handleSubmit={handleSubmit}
       handleCancel={() => navigate('/properties')}

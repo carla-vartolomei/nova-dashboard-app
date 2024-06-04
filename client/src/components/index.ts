@@ -1,17 +1,14 @@
 // header
-export { default as Header } from './header';
+export { default as Header } from './header'
 
 //title
-export { default as Title } from './title';
+export { default as Title } from './title'
 
 // common
-export * from './common';
+export * from './common'
 
 // charts
-export * from './charts';
+export * from './charts'
 
 // agent
-export { default as AgentCard } from './agent/AgentCard';
-
-// home
-export { default as TopAgent } from './home/TopAgent';
+export { default as AgentCard } from './agent/AgentCard'

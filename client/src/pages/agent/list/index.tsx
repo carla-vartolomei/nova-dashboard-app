@@ -4,7 +4,12 @@ import { Box, Typography } from '@mui/material'
 import { AgentCard } from '../../../components'
 
 const Agents = () => {
-  const { data, isLoading, isError } = useList({ resource: 'users' })
+  const { data, isLoading, isError } = useList({
+    resource: 'users',
+    pagination: {
+      mode: 'off',
+    },
+  })
   const allAgents = data?.data ?? []
 
   if (isLoading) return <Typography>Loading...</Typography>

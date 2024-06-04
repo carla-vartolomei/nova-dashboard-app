@@ -1,15 +1,17 @@
-import { ApexOptions } from 'apexcharts';
+import { ApexOptions } from 'apexcharts'
 
-export const TotalRevenueSeries = [
-  {
-    name: 'Last Month',
-    data: [183, 124, 115, 85, 143, 143, 96],
-  },
-  {
-    name: 'Running Month',
-    data: [95, 84, 72, 44, 108, 108, 47],
-  },
-];
+export const monthsArray = [...Array(13).keys()].splice(1)
+
+// Function to parse the date string and return a Date object
+export const parseDate = (dateString: string) => {
+  const [day, month, year] = dateString.split('.').map(Number)
+  return new Date(year, month - 1, day) // month is zero-based in JavaScript Date
+}
+
+// Function to format the price
+export const formatPrice = (price: number) => {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+}
 
 export const TotalRevenueOptions: ApexOptions = {
   chart: {
@@ -37,11 +39,24 @@ export const TotalRevenueOptions: ApexOptions = {
     width: 4,
   },
   xaxis: {
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+    categories: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ],
   },
   yaxis: {
     title: {
-      text: '$ (thousands)',
+      text: 'RON',
     },
   },
   fill: {
@@ -54,8 +69,8 @@ export const TotalRevenueOptions: ApexOptions = {
   tooltip: {
     y: {
       formatter(val: number) {
-        return `$ ${val} thousands`;
+        return `${formatPrice(val)} RON`
       },
     },
   },
-};
+}

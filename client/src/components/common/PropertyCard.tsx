@@ -19,7 +19,7 @@ const PropertyCard = (props: PropertyCardProps) => {
       sx={{
         cursor: 'pointer',
         textDecoration: 'none',
-        maxWidth: '330px',
+        maxWidth: '310px',
         padding: '10px',
         '&:hover': { boxShadow: '0 22px 45px 2px rgba(176, 176, 176, 0.1' },
       }}
@@ -61,7 +61,7 @@ const PropertyCard = (props: PropertyCardProps) => {
           height="fit-content"
         >
           <Typography color="#475be8" fontSize={12} fontWeight={600}>
-            ${price}
+            {price} RON
           </Typography>
         </Box>
       </CardContent>
