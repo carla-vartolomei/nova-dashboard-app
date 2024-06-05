@@ -5,7 +5,7 @@ type PassedProps = {
   properties: number
   sales: number
   users: number
-  lastYear: {}
+  lastYear: any
 }
 
 const StatisticsCards = ({
@@ -47,6 +47,7 @@ const StatisticsCards = ({
     <>
       {statistics.map(({ title, color, value, lastYear }) => (
         <Box
+          key={title}
           component="div"
           id="chart"
           flex={1}

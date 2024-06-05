@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useGetIdentity } from '@refinedev/core'
 import { EmailOutlined, LocationCity, Phone, Place } from '@mui/icons-material'
-import { Box, Stack, Typography } from '@mui/material'
+import { Box, Stack, SxProps, Theme, Typography } from '@mui/material'
 import { AgentCardProp, InfoBarProps } from '../../interfaces/agent'
 
 const InfoBar = ({ icon, name }: InfoBarProps) => (
@@ -13,8 +13,23 @@ const InfoBar = ({ icon, name }: InfoBarProps) => (
   </Stack>
 )
 
-const AgentCard = (props: AgentCardProp) => {
-  const { id, name, email, avatar, noOfProperties } = props
+const AgentCard = (props: AgentCardProp & { sx?: SxProps<Theme> }) => {
+  const {
+    id,
+    name,
+    email,
+    avatar,
+    noOfProperties,
+    sx = {
+      display: 'flex',
+      flexDirection: { xs: 'column', sm: 'row' },
+      gap: '20px',
+      padding: '20px',
+      '&:hover': {
+        boxShadow: '0 22px 45px 2px rgba(176, 176, 176, 0.1)',
+      },
+    },
+  } = props
   const { data: currentUser }: any = useGetIdentity()
 
   const generateLink = () => {
@@ -23,20 +38,7 @@ const AgentCard = (props: AgentCardProp) => {
   }
 
   return (
-    <Box
-      component={Link}
-      to={generateLink()}
-      width="100%"
-      sx={{
-        display: 'flex',
-        flexDirection: { xs: 'column', sm: 'row' },
-        gap: '20px',
-        padding: '20px',
-        '&:hover': {
-          boxShadow: '0 22px 45px 2px rgba(176, 176, 176, 0.1)',
-        },
-      }}
-    >
+    <Box component={Link} to={generateLink()} width="100%" sx={sx}>
       <img
         src={avatar}
         alt="user"

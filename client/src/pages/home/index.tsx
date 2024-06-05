@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useList } from '@refinedev/core'
 import { PropertyReferrals, TotalRevenue, PropertyCard } from '../../components'
-import { Box, Typography, Stack } from '@mui/material'
+import { Box, Typography, Stack, Button } from '@mui/material'
 import StatisticsCards from '../../components/home/StatisticsCards'
 import axios from 'axios'
 import { lastYear } from './utils'
+import PropertiesSold from '../../components/home/PropertiesSold'
+import TopAgents from '../../components/home/TopAgents'
+import { Download } from '@mui/icons-material'
+import AgentsWork from '../../components/charts/AgentsWork'
+import PropertiesLocation from '../../components/home/PropertiesLocation'
+import PropertiesType from '../../components/home/PropertiesType'
 
 const Home = () => {
   const [sales, setSales] = useState([])
@@ -38,9 +44,15 @@ const Home = () => {
 
   return (
     <Box component="div">
-      <Typography fontSize={25} fontWeight={700} color={'#11142D'}>
-        Dashboard
-      </Typography>
+      <Stack direction="row" alignItems="center" justifyContent="space-between">
+        <Typography fontSize={25} fontWeight={700} color={'#11142D'}>
+          Dashboard
+        </Typography>
+        <Button variant="outlined">
+          <Download sx={{ marginRight: 1 }} />
+          2023 sales report
+        </Button>
+      </Stack>
       <Box component="div" mt="20px" display="flex" flexWrap="wrap" gap={4}>
         <StatisticsCards
           properties={allProperties.length}
@@ -49,9 +61,34 @@ const Home = () => {
           lastYear={lastYear}
         />
       </Box>
-      <Stack mt="25px" width="100%" direction="column" gap={4}>
+      <Stack mt="25px" width="100%" direction="row" gap={4}>
+        <PropertiesSold
+          allProperties={allProperties.length}
+          soldProperties={sales.length}
+          lastYear={{
+            allProperties: lastYear.properties.total,
+            soldProperties: lastYear.properties.sold,
+          }}
+        />
+        <TopAgents agents={allUsers} />
+      </Stack>
+      <Box mt="25px" width="100%">
         <TotalRevenue sales={sales} lastYear={lastYear} />
-        {/* <PropertyReferrals /> */}
+      </Box>
+      <Box mt="25px" width="100%">
+        <AgentsWork
+          agents={allUsers}
+          properties={allProperties.length}
+          sales={sales}
+          lastYear={{
+            properties: lastYear.properties.total,
+            sales: lastYear.sales.total,
+          }}
+        />
+      </Box>
+      <Stack mt="25px" width="100%" height="100%" direction="row" gap={4}>
+        <PropertiesLocation />
+        <PropertiesType properties={allProperties} />
       </Stack>
       <Box
         component="div"

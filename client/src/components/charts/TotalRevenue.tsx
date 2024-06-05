@@ -8,14 +8,20 @@ import {
   parseDate,
 } from './chart.config'
 
-const TotalRevenue = ({ sales, lastYear: { sales: lastYearSales } }) => {
+const TotalRevenue = ({
+  sales,
+  lastYear: { sales: lastYearSales },
+}: {
+  sales: any
+  lastYear: any
+}) => {
   const getSalesByMonth = (month: number) => {
-    const monthSales = sales.filter((sale) => {
+    const monthSales = sales.filter((sale: { date: string }) => {
       const saleDate = parseDate(sale.date)
       return saleDate.getMonth() === month - 1
     })
     let total = 0
-    monthSales.forEach((el) => (total = total + el.price))
+    monthSales.forEach((el: { price: number }) => (total = total + el.price))
     return total
   }
 
@@ -88,6 +94,7 @@ const TotalRevenue = ({ sales, lastYear: { sales: lastYearSales } }) => {
       <ReactApexChart
         type="bar"
         height={310}
+        width="100%"
         series={[
           {
             name: 'Last Year',
