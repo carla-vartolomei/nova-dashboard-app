@@ -42,7 +42,7 @@ const PropertiesLocation = () => {
         />
       </Box>
       <Typography fontSize="12px" fontWeight={400} color="#808191">
-        Companies only list properties in this location.
+        Company only list properties in this location.
       </Typography>
     </Box>
   )

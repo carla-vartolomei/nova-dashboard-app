@@ -48,10 +48,15 @@ const Home = () => {
         <Typography fontSize={25} fontWeight={700} color={'#11142D'}>
           Dashboard
         </Typography>
-        <Button variant="outlined">
-          <Download sx={{ marginRight: 1 }} />
-          2023 sales report
-        </Button>
+        <a
+          href="https://res.cloudinary.com/dko5tsxnv/raw/upload/v1720024115/2023-sales-report.xlsx"
+          download
+        >
+          <Button variant="outlined">
+            <Download sx={{ marginRight: 1 }} />
+            2023 sales report
+          </Button>
+        </a>
       </Stack>
       <Box component="div" mt="20px" display="flex" flexWrap="wrap" gap={4}>
         <StatisticsCards
